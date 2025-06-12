@@ -1,13 +1,13 @@
 import { mockEquipmentHistory } from "@/data/equipment"
-import { EquipmentHistory } from "@/types/equipment"
+import { EquipmentHistory, FilterStateI, StatusTypes } from "@/types/equipment"
 import { useEffect, useState } from "react"
 
 export const useFilters = () => {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<FilterStateI>({
     search: "",
     itemType: "",
-    status: [] as string[],
-    dateRange: { from: undefined, to: undefined } as any,
+    status: [] as StatusTypes[],
+    dateRange: { from: undefined, to: undefined },
   })
 
   const [filteredData, setFilteredData] = useState<EquipmentHistory[]>([])

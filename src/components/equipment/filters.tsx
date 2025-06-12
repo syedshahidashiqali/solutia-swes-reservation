@@ -9,16 +9,18 @@ import { useState } from "react"
 import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { FilterStateI, ItemTypes, StatusTypes } from "@/types/equipment"
+import { DateRange } from "react-day-picker"
 
-const itemTypes = ["Boots", "Vest", "Helmet"]
-const statuses = ["Returned", "Pending", "Overdue"]
+const itemTypes: ItemTypes[] = ["Boots", "Vest", "Helmet"]
+const statuses: StatusTypes[] = ["Returned", "Pending", "Overdue"]
 
 export function Filters({
   filters,
   setFilters,
 }: {
-  filters: any;
-  setFilters: (v: any) => void;
+  filters: FilterStateI;
+  setFilters: (v: FilterStateI) => void;
 }) {
   const [open, setOpen] = useState(false)
 
@@ -68,8 +70,8 @@ export function Filters({
           <PopoverContent className="w-full">
             <Calendar
               mode="range"
-              selected={filters.dateRange}
-              onSelect={(range) => setFilters({ ...filters, dateRange: range })}
+              selected={filters.dateRange as DateRange}
+              onSelect={(range) => setFilters({ ...filters, dateRange: range as DateRange })}
               numberOfMonths={2}
             />
           </PopoverContent>
