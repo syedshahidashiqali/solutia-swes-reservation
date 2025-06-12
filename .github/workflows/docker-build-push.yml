@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_NAME: syedshahidashiqali/solutia-reservation-assessment
+      TAG: ${{ github.run_number }}  # consistent tag across steps
+
     steps:
       - uses: actions/checkout@v4
 
@@ -17,15 +21,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build the Docker image
+      - name: Build Docker image
         run: |
-          IMAGE_NAME=syedshahidashiqali/solutia-reservation-assessment
-          TAG=$(date +%s)
           docker build . -t $IMAGE_NAME:$TAG -t $IMAGE_NAME:latest
 
       - name: Push Docker image
         run: |
-          IMAGE_NAME=syedshahidashiqali/solutia-reservation-assessment
-          TAG=$(date +%s)
           docker push $IMAGE_NAME:$TAG
           docker push $IMAGE_NAME:latest
