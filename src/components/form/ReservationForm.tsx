@@ -19,14 +19,18 @@ import { CalendarIcon } from "lucide-react";
 import { ReservationFormValues, reservationSchema } from "@/lib/validation";
 import { useState } from "react";
 
-export function ReservationForm() {
+type Props = {
+  prefillDate?: Date;
+};
+
+export function ReservationForm({ prefillDate }: Props) {
   const [loading, setLoading] = useState(false);
   const form = useForm<ReservationFormValues>({
     resolver: zodResolver(reservationSchema),
     defaultValues: {
       employeeId: "",
       item: "",
-      date: new Date(),
+      date: prefillDate ?? new Date(),
     },
   });
 
