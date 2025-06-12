@@ -22,11 +22,13 @@ import { EquipmentHistory } from "@/types/equipment"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  loading?: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  loading = false,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -35,6 +37,12 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
+
+  const renderSpinner = (
+    <div className="flex justify-center items-center">
+      <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-gray-500"></div>
+    </div>
+  )
 
   return (
     <div className="space-y-4">
@@ -58,16 +66,20 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               ))}
             </TableHeader>
+
             <TableBody>
-              {table.getRowModel().rows?.length ? (
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="text-center py-10">
+                    {renderSpinner}
+                  </TableCell>
+                </TableRow>
+              ) : table.getRowModel().rows.length > 0 ? (
                 table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -86,19 +98,25 @@ export function DataTable<TData, TValue>({
 
       {/* Card view for mobile */}
       <div className="block md:hidden space-y-4">
-        {data.map((row, index) => {
-          const equipment = row as EquipmentHistory
-          return (
-            <div className="border rounded p-4 shadow-sm" key={index}>
-              <div><strong>Employee:</strong> {equipment.employeeName}</div>
-              <div><strong>Item:</strong> {equipment.itemName} ({equipment.itemId})</div>
-              <div><strong>Type:</strong> {equipment.itemType}</div>
-              <div><strong>Status:</strong> {equipment.status}</div>
-              <div><strong>Date:</strong> {equipment.date.toDateString()}</div>
-              <div><strong>Return Date:</strong> {equipment.returnDate?.toDateString() || "N/A"}</div>
-            </div>
-          )
-        })}
+        {loading ? (
+          renderSpinner
+        ) : table.getRowModel().rows.length ? (
+          table.getRowModel().rows.map((row) => {
+            const equipment = row.original as EquipmentHistory
+            return (
+              <div className="border rounded p-4 shadow-sm" key={equipment.id}>
+                <div><strong>Employee:</strong> {equipment.employeeName}</div>
+                <div><strong>Item:</strong> {equipment.itemName} ({equipment.itemId})</div>
+                <div><strong>Type:</strong> {equipment.itemType}</div>
+                <div><strong>Status:</strong> {equipment.status}</div>
+                <div><strong>Date:</strong> {equipment.date.toDateString()}</div>
+                <div><strong>Return Date:</strong> {equipment.returnDate?.toDateString() || "N/A"}</div>
+              </div>
+            )
+          })
+        ) : (
+          <div className="text-center text-sm text-muted-foreground">No results.</div>
+        )}
       </div>
       <div>
         <DataTablePagination table={table} />

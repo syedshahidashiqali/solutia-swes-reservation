@@ -11,30 +11,39 @@ export const useFilters = () => {
   })
 
   const [filteredData, setFilteredData] = useState<EquipmentHistory[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const filtered = mockEquipmentHistory.filter((row) => {
-      const matchesSearch =
-        row.employeeName.toLowerCase().includes(filters.search.toLowerCase()) ||
-        row.itemId.toLowerCase().includes(filters.search.toLowerCase())
+    setLoading(true)
 
-      const matchesItem = filters.itemType ? row.itemType === filters.itemType : true
+    const timeout = setTimeout(() => {
+      const filtered = mockEquipmentHistory.filter((row) => {
+        const matchesSearch =
+          row.employeeName.toLowerCase().includes(filters.search.toLowerCase()) ||
+          row.itemId.toLowerCase().includes(filters.search.toLowerCase())
 
-      const matchesStatus =
-        filters.status.length > 0 ? filters.status.includes(row.status) : true
+        const matchesItem = filters.itemType ? row.itemType === filters.itemType : true
 
-      const matchesDate =
-        filters.dateRange?.from && filters.dateRange?.to
-          ? row.date >= filters.dateRange.from && row.date <= filters.dateRange.to
-          : true
+        const matchesStatus =
+          filters.status.length > 0 ? filters.status.includes(row.status) : true
 
-      return matchesSearch && matchesItem && matchesStatus && matchesDate
-    })
+        const matchesDate =
+          filters.dateRange?.from && filters.dateRange?.to
+            ? row.date >= filters.dateRange.from && row.date <= filters.dateRange.to
+            : true
 
-    setFilteredData(filtered)
+        return matchesSearch && matchesItem && matchesStatus && matchesDate
+      })
+
+      setFilteredData(filtered)
+      setLoading(false)
+    }, 300) // simulate async filtering
+
+    return () => clearTimeout(timeout)
   }, [filters])
 
   return {
+    loading,
     filters,
     setFilters,
     filteredData,
