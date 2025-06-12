@@ -20,6 +20,17 @@ This is a front-end assessment project built as part of the recruitment process 
 
 **[https://github.com/syedshahidashiqali/solutia-swes-reservation/](https://github.com/syedshahidashiqali/solutia-swes-reservation/)**
 
+## 🐳 Docker Image
+
+You can run this app using Docker:
+
+**[https://hub.docker.com/r/syedshahidashiqali/solutia-reservation-assessment](https://hub.docker.com/r/syedshahidashiqali/solutia-reservation-assessment)**
+
+```bash
+docker pull syedshahidashiqali/solutia-reservation-assessment
+docker run -p 3000:3000 syedshahidashiqali/solutia-reservation-assessment
+```
+
 ---
 
 ## 🛠 Tech Stack
