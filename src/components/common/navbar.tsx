@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="max-w-3xl mx-auto px-4 md:px-8 flex justify-between items-center h-16">
         {/* App Name */}
         <Link href="/" className="font-semibold text-lg">
-          SWES Reservation App by Shahid
+          SWES Reservation App by Shahid 1
         </Link>
 
         {/* Mobile Menu Button */}
