@@ -18,13 +18,16 @@ import {
 import { CalendarIcon } from "lucide-react";
 import { ReservationFormValues, reservationSchema } from "@/lib/validation";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-type Props = {
-  prefillDate?: Date;
-};
-
-export function ReservationForm({ prefillDate }: Props) {
+export function ReservationForm() {
   const [loading, setLoading] = useState(false);
+
+  // Use Next.js useSearchParams to get the date from the URL
+  const searchParams = useSearchParams();
+  const dateParam = searchParams.get("date");
+  const prefillDate = dateParam ? new Date(dateParam) : undefined;
+
   const form = useForm<ReservationFormValues>({
     resolver: zodResolver(reservationSchema),
     defaultValues: {
