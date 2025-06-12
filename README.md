@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Solutia SWES Reservation App
 
-## Getting Started
+This is a front-end assessment project built as part of the recruitment process for **Solutia s.r.o.**. The application allows creating equipment reservations, viewing reservation history, and checking availability in a calendar view.
 
-First, run the development server:
+---
+
+## ✅ Implemented Use Cases
+
+* **UC-R1**: Create Reservation Form
+* **UC-R5**: Equipment Overview & History List View
+* **UC-R12**: Calendar View for Available Dates
+
+---
+
+## 🚀 Live URL
+
+**[https://solutia-swes-reservation-e5fy.vercel.app/](https://solutia-swes-reservation-e5fy.vercel.app/)**
+
+## 📦 Repository
+
+**[https://github.com/syedshahidashiqali/solutia-swes-reservation/](https://github.com/syedshahidashiqali/solutia-swes-reservation/)**
+
+---
+
+## 🛠 Tech Stack
+
+* **Next.js** (App Router)
+* **TypeScript**
+* **Tailwind CSS**
+* **shadcn/ui**
+
+## 🧪 Features
+
+### UC-R1: Reservation Form
+
+* Fields: Employee ID, Item Dropdown, Date Picker
+* Client-side validation
+* Mock POST `/api/reservations`
+
+### UC-R5: Equipment Overview & History
+
+* Responsive table with:
+
+  * Filter controls (date, type, status, search)
+  * Pagination (10/25/50)
+  * Sorting by columns
+  * Status indicators
+  * Loading and empty states
+
+### UC-R12: Calendar View
+
+* Monthly view with:
+
+  * Available/unavailable day highlights
+  * Click to prefill reservation date
+
+---
+
+## 📦 Running Locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone https://github.com/syedshahidashiqali/solutia-swes-reservation
+cd solutia-swes-reservation
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📬 Contact
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Syed Shahid Ali – [LinkedIn](https://www.linkedin.com/in/syed-shahid-ali-ssa)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Assessment completed as per Solutia recruitment guidelines. No real backend or mock servers implemented; only simulated client-side logic and interaction.
