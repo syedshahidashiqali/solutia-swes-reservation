@@ -1,6 +1,6 @@
 "use client"
 
-import { ReservationForm } from "@/components/form/ReservationForm";
+import { ReservationForm } from "@/components/form/reservation-form";
 import { useSearchParams } from "next/navigation";
 
 export default function Page() {

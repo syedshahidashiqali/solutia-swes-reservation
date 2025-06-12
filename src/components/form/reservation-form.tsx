@@ -55,8 +55,12 @@ export function ReservationForm({ prefillDate }: Props) {
 
       toast.success(`Reservation created for Employee ID: ${data.employeeId}`);
       form.reset();
-    } catch (error: any) {
-      toast.error(`Error: ${error.message}`);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred");
+      }
     } finally {
       setLoading(false);
     }
